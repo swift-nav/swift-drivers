@@ -1,0 +1,98 @@
+; Windows USB CDC ACM Setup File for Swift Navigation GNSS Receivers
+
+; Based on INF template which was:
+;     Copyright (c) 2000 Microsoft Corporation
+;     Copyright (c) 2007 Microchip Technology Inc.
+; likely to be covered by the MLPL as found at:
+;    <http://msdn.microsoft.com/en-us/cc300389.aspx#MLPL>.
+; For use only on Windows operating systems.
+
+[Version]
+Signature="$Windows NT$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%Company%
+CatalogFile=Swift-Navigation-GNSS-Receiver-USB-Driver.cat
+DriverVer=10/25/2017,1.0
+
+[Manufacturer]
+%Company%=DeviceList, NTamd64
+
+[DestinationDirs]
+DefaultDestDir=12
+
+
+;------------------------------------------------------------------------------
+;  Windows 2000/XP/Vista-32bit Sections
+;------------------------------------------------------------------------------
+
+[DriverInstall.nt]
+include=mdmcpq.inf
+CopyFiles=FakeModemCopyFileSection
+AddReg=DriverInstall.nt.AddReg
+
+[DriverInstall.nt.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,v.sys
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[DriverInstall.nt.Services]
+AddService=usbser, 0x00000002, DriverService.nt
+
+[DriverService.nt]
+DisplayName=%SERVICE%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\usbser.sys
+
+;------------------------------------------------------------------------------
+;  Vista-64bit Sections
+;------------------------------------------------------------------------------
+
+[DriverInstall.NTamd64]
+include=mdmcpq.inf
+CopyFiles=FakeModemCopyFileSection
+AddReg=DriverInstall.NTamd64.AddReg
+
+[FakeModemCopyFileSection]
+;USBSER.sys,,,0x20
+
+[DriverInstall.NTamd64.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,usbser.sys
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[DriverInstall.NTamd64.Services]
+AddService=usbser, 0x00000002, DriverService.NTamd64
+
+[DriverService.NTamd64]
+DisplayName=%SERVICE%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\usbser.sys
+
+
+;------------------------------------------------------------------------------
+;  Vendor and Product ID Definitions
+;------------------------------------------------------------------------------
+[SourceDisksFiles]
+[SourceDisksNames]
+
+[DeviceList]
+%PORT1%=DriverInstall, USB\VID_2E69&PID_1001, USB\VID_2E69&PID_1001&REV_0406&MI_00
+%PORT2%=DriverInstall, USB\VID_2E69&PID_1001, USB\VID_2E69&PID_1001&REV_0406&MI_02
+
+[DeviceList.NTamd64]
+%PORT1%=DriverInstall, USB\VID_2E69&PID_1001, USB\VID_2E69&PID_1001&REV_0406&MI_00
+%PORT2%=DriverInstall, USB\VID_2E69&PID_1001, USB\VID_2E69&PID_1001&REV_0406&MI_02
+
+;------------------------------------------------------------------------------
+;  String Definitions
+;------------------------------------------------------------------------------
+[Strings]
+Company      = "Swift Navigation, Inc."
+PORT1        = "Swift Navigation GNSS Receiver"
+PORT2        = "Swift Navigation GNSS Receiver Linux Shell"
+SERVICE      = "Swift Navigation GNSS Receiver USB UART Emulation Driver"
