@@ -83,16 +83,19 @@ ServiceBinary=%12%\usbser.sys
 [DeviceList]
 %PORT1%=DriverInstall, USB\VID_2E69&PID_1001, USB\VID_2E69&PID_1001&REV_0406&MI_00
 %PORT2%=DriverInstall, USB\VID_2E69&PID_1001, USB\VID_2E69&PID_1001&REV_0406&MI_02
+%PORT3%=DriverInstall, USB\VID_2E69&PID_1001, USB\VID_2E69&PID_1001&REV_0406&MI_04
 
 [DeviceList.NTamd64]
 %PORT1%=DriverInstall, USB\VID_2E69&PID_1001, USB\VID_2E69&PID_1001&REV_0406&MI_00
 %PORT2%=DriverInstall, USB\VID_2E69&PID_1001, USB\VID_2E69&PID_1001&REV_0406&MI_02
+%PORT3%=DriverInstall, USB\VID_2E69&PID_1001, USB\VID_2E69&PID_1001&REV_0406&MI_04
 
 ;------------------------------------------------------------------------------
 ;  String Definitions
 ;------------------------------------------------------------------------------
 [Strings]
 Company      = "Swift Navigation, Inc."
-PORT1        = "Swift Navigation GNSS Receiver"
-PORT2        = "Swift Navigation GNSS Receiver Linux Shell"
+PORT1        = "Swift Navigation GNSS Receiver Configurable Interface"
+PORT2        = "Swift Navigation GNSS Receiver SBP Interface"
+PORT3        = "Swift Navigation GNSS Receiver Linux Shell"
 SERVICE      = "Swift Navigation GNSS Receiver USB UART Emulation Driver"
